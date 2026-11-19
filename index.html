@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Visit Taniti</title>
+    <style>
+        :root {
+            --surface: #fff;
+            --text: #231f33;
+            --muted: #5a5570;
+            --line: #cfc8dd;
+            --chip: #f1ecf7;
+            --btn-bg: #8f2457;
+            --btn-fg: #fff;
+            --scrim: rgba(24, 18, 56, .7);
+            color-scheme: light;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --surface: #1f1c30;
+                --text: #f3f0fb;
+                --muted: #c4bedb;
+                --line: #4a4565;
+                --chip: #2d2946;
+                --btn-bg: #ffb3c6;
+                --btn-fg: #1b1030;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --surface: #1f1c30;
+            --text: #f3f0fb;
+            --muted: #c4bedb;
+            --line: #4a4565;
+            --chip: #2d2946;
+            --btn-bg: #ffb3c6;
+            --btn-fg: #1b1030;
+            color-scheme: dark
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background: #7b3f86 linear-gradient(180deg, #2b2f6b 0%, #7b3f86 30%, #d9607a 62%, #f39a5c 85%, #ffd27a 100%)
+        }
+
+        header {
+            background: var(--scrim);
+            color: #fff;
+            padding: 12px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 20px
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 18px
+        }
+
+        nav a {
+            padding: 10px 2px;
+            font-size: 15px;
+            border-bottom: 3px solid transparent;
+            min-height: 24px
+        }
+
+        nav a[aria-current="page"] {
+            border-bottom-color: #ffd27a;
+            font-weight: 700
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 24px auto;
+            padding: 0 20px;
+            display: grid;
+            gap: 20px
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0
+        }
+
+        .panel,
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 18px
+        }
+
+        .hero {
+            background: var(--scrim);
+            color: #fff;
+            border-radius: 10px;
+            padding: 40px 24px;
+            display: grid;
+            gap: 14px
+        }
+
+        .hero h1 {
+            font-size: 32px
+        }
+
+        .btn {
+            background: var(--btn-bg);
+            color: var(--btn-fg);
+            border: 0;
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-size: 15px;
+            min-height: 44px;
+            cursor: pointer;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .btn.alt {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--btn-bg)
+        }
+
+        .btn.light {
+            background: #fff;
+            color: #231f33
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px
+        }
+
+        .card {
+            display: grid;
+            gap: 8px;
+            align-content: start
+        }
+
+        .ph {
+            background: var(--chip);
+            border: 2px dashed var(--line);
+            border-radius: 6px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 0
+        }
+
+        p {
+            margin: 0
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .chip {
+            background: var(--chip);
+            color: var(--text);
+            border: 2px solid var(--line);
+            border-radius: 20px;
+            padding: 8px 14px;
+            min-height: 44px;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .chip[aria-pressed="true"] {
+            border-color: var(--btn-bg);
+            font-weight: 700
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px
+        }
+
+        .day {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px;
+            display: grid;
+            gap: 8px;
+            align-content: start
+        }
+
+        .item {
+            background: var(--chip);
+            border-radius: 6px;
+            padding: 8px;
+            display: grid;
+            gap: 6px;
+            font-size: 14px
+        }
+
+        select {
+            min-height: 40px;
+            font-size: 14px;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--line);
+            border-radius: 6px
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #ffd27a;
+            outline-offset: 2px
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+            display: grid;
+            gap: 6px
+        }
+
+        .faq details {
+            border-top: 1px solid var(--line)
+        }
+
+        .faq summary {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px
+        }
+
+        .faq details>div {
+            padding: 0 0 14px;
+            display: grid;
+            gap: 8px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a class="brand" href="#home">Visit Taniti</a>
+        <nav id="nav" aria-label="Main"></nav>
+    </header>
+    <main id="app"></main>
+    <script>
+        var THINGS = [
+            { id: 't1', t: 'Beach day', m: 'Taniti City', d: 'Placeholder: a relaxed day on the sand.' },
+            { id: 't2', t: 'Snorkeling trip', m: 'Merriton Landing', d: 'Placeholder: a guided time on the water.' },
+            { id: 't3', t: 'Rainforest hike', m: 'Rainforest and Volcano', d: 'Placeholder: a walk under the trees.' },
+            { id: 't4', t: 'Volcano visit', m: 'Rainforest and Volcano', d: 'Placeholder: a tour to the volcano.' },
+            { id: 't5', t: 'Zip-lining', m: 'Rainforest and Volcano', d: 'Placeholder: a canopy adventure.' },
+            { id: 't6', t: 'Merriton Landing activities', m: 'Merriton Landing', d: 'Placeholder: activities close together and easy to explore on foot.' }];
+        var STAY = [
+            { id: 's1', t: 'Family-owned hotel A', m: 'Hotel', d: 'Placeholder listing: rooms for a family of five.' },
+            { id: 's2', t: 'Family-owned hotel B', m: 'Hotel', d: 'Placeholder listing: breakfast and a quiet courtyard.' },
+            { id: 's3', t: 'Family-owned hotel C', m: 'Hotel', d: 'Placeholder listing: close to Taniti City.' }];
+        var EAT = [
+            { id: 'e1', t: 'Local fish and rice spot', m: 'Local fish and rice', d: 'Placeholder listing: 5 restaurants of this kind.' },
+            { id: 'e2', t: 'American-style restaurant', m: 'American', d: 'Placeholder listing: 3 restaurants of this kind, kid-friendly menus.' },
+            { id: 'e3', t: 'Pan-Asian restaurant', m: 'Pan-Asian', d: 'Placeholder listing: 2 restaurants of this kind.' }];
+        var ALL = THINGS.concat(STAY, EAT);
+        var trip = []; try { trip = JSON.parse(localStorage.getItem('trip') || '[]') } catch (e) { }
+        var f = { area: 'All', cuisine: 'All' };
+        function save() { try { localStorage.setItem('trip', JSON.stringify(trip)) } catch (e) { } }
+        function has(id) { return trip.some(function (x) { return x.id === id }) }
+        function card(i) { return '<article class="card"><div class="ph">Image placeholder</div><h3>' + i.t + '</h3><p class="muted">' + i.m + '</p><p>' + i.d + '</p><button class="btn" data-add="' + i.id + '">' + (has(i.id) ? 'Added to trip ✓' : 'Add to trip') + '</button></article>' }
+        function chips(list, key) { return '<div class="chips" role="group" aria-label="Filter">' + list.map(function (v) { return '<button class="chip" data-f="' + key + '" data-v="' + v + '" aria-pressed="' + (f[key] === v) + '">' + v + '</button>' }).join('') + '</div>' }
+        function pv(title, text, href, label) { return '<div class="card"><h3>' + title + '</h3><p>' + text + '</p><a class="btn alt" href="' + href + '">' + label + '</a></div>' }
+        var V = {
+            home: function () {
+                return '<section class="hero"><h1>Plan your family trip to Taniti</h1><p>Beaches, rainforest, and a volcano, with everything you need to get there and get around.</p><div><a class="btn light" href="#plan">Start my trip plan</a></div></section>' +
+                    '<section class="panel"><strong>Heads up:</strong> many attractions and restaurants close on national holidays. Check Know Before You Go when you plan.</section>' +
+                    '<section><h2 style="color:#fff;margin-bottom:12px">What you will find</h2><div class="grid">' +
+                    pv('Things to do', 'Beaches, hikes, snorkeling, and the volcano.', '#things', 'See all things to do') +
+                    pv('Getting around', 'Rental cars, buses, taxis, and bikes.', '#getting', 'See transportation') +
+                    pv('Where to stay', 'Hostels, family-owned hotels, and a four-star resort.', '#stay', 'See places to stay') +
+                    pv('Where to eat', 'Local fish and rice, American, and Pan-Asian.', '#eat', 'See places to eat') + pv('Good to know', 'Currency, power, language, safety, and holidays.', '#faq', 'Read the FAQ') + '</div></section>'
+            },
+            things: function () {
+                var a = ['All', 'Taniti City', 'Merriton Landing', 'Rainforest and Volcano'];
+                return '<div class="panel"><h1>Things to do</h1><p class="muted">Browse by area and add favorites to your trip.</p></div><div class="panel">' + chips(a, 'area') + '</div><div class="grid">' + THINGS.filter(function (i) { return f.area === 'All' || i.m === f.area }).map(card).join('') + '</div>'
+            },
+            getting: function () {
+                return '<div class="panel"><h1>Getting around</h1><p class="muted">Start from the airport and choose what fits your family.</p></div><div class="grid">' +
+                    [['From the airport', 'Rental cars come from a local agency near the airport.'], ['Public buses', 'Run in Taniti City from 5 a.m. to 11 p.m.'], ['Private buses', 'Serve the rest of the island.'], ['Taxis', 'Available in Taniti City.'], ['Bikes', 'Bike rentals require helmets.'], ['On foot', 'Merriton Landing is easy to explore on foot.']].map(function (x) { return '<div class="card"><h3>' + x[0] + '</h3><p>' + x[1] + '</p></div>' }).join('') + '</div><div class="panel"><a class="btn" href="#plan">Start my trip plan</a></div>'
+            },
+            stay: function () { return '<div class="panel"><h1>Where to stay</h1><p class="muted">Lodging ranges from an inexpensive hostel to one large four-star resort, with many small family-owned hotels and a growing number of bed and breakfasts. All lodging is regulated and regularly inspected by the government. Listings below are placeholders.</p></div><div class="grid">' + STAY.map(card).join('') + '</div>' },
+            eat: function () { var c = ['All', 'Local fish and rice', 'American', 'Pan-Asian']; return '<div class="panel"><h1>Where to eat</h1><p class="muted">Ten restaurants on the island. Listings below are placeholders.</p></div><div class="panel">' + chips(c, 'cuisine') + '</div><div class="grid">' + EAT.filter(function (i) { return f.cuisine === 'All' || i.m === f.cuisine }).map(card).join('') + '</div>' },
+            plan: function () {
+                var d = [1, 2, 3, 4, 5];
+                var body = trip.length ? '' : '<p>Your trip is empty. Add items from <a href="#things" style="color:var(--text)">Things to do</a>, <a href="#stay" style="color:var(--text)">Where to stay</a>, or <a href="#eat" style="color:var(--text)">Where to eat</a>.</p>';
+                return '<div class="panel"><h1>Plan my trip</h1><p class="muted">Choose a day for each item you added.</p>' + body + '</div><div class="days">' + d.map(function (n) { var items = trip.filter(function (x) { return x.day === n }); return '<section class="day"><h3>Day ' + n + '</h3>' + (items.length ? items.map(function (x) { var it = ALL.filter(function (a) { return a.id === x.id })[0]; return '<div class="item"><strong>' + it.t + '</strong><label>Day <select data-day="' + x.id + '">' + d.map(function (m) { return '<option' + (m === x.day ? ' selected' : '') + '>' + m + '</option>' }).join('') + '</select></label><button class="chip" data-rm="' + x.id + '">Remove</button></div>' }).join('') : '<p class="note">Nothing planned yet.</p>') + '</section>' }).join('') + '</div>' +
+                    '<div class="panel"><h2>Know before you go</h2><ul><li>Many attractions and restaurants close on national holidays.</li><li>Taniti uses the U.S. dollar and 120-volt outlets.</li><li>Pickpocketing is on the rise, so keep bags close in crowds.</li><li>Little English is spoken in rural areas.</li></ul></div>'
+            }
+            , faq: function () {
+                function qa(q, a) { return '<details><summary>' + q + '</summary><div>' + a + '</div></details>' }
+                function sec(t, items) { return '<section class="panel faq"><h2>' + t + '</h2>' + items.join('') + '</section>' }
+                return '<div class="panel"><h1>Frequently asked questions</h1><p class="muted">Taniti is a small tropical island in the Pacific, under 500 square miles, with about 20,000 residents. It has sandy and rocky beaches, a safe harbor, rainforest, and a small active volcano.</p></div>' +
+                    sec('Getting there and around', [
+                        qa('How do I get to Taniti?', '<p>Almost all visitors arrive by air at the island’s small airport, which handles small jets and propeller planes. The airport is being expanded so larger jets can land within the next few years.</p><p>A small cruise ship docks in Yellow Leaf Bay for one night each week.</p>'),
+                        qa('Do I need a car?', '<p>Not always. Public buses serve Taniti City from 5 a.m. to 11 p.m. every day, and private buses serve the rest of the island. Taxis are available in Taniti City.</p><p>Bikes and helmets can be rented from several vendors, and helmets are required by law. Taniti City is flat and very walkable, and the area around Merriton Landing is easy to explore on foot.</p>')]) +
+                    sec('Money and power', [
+                        qa('What currency does Taniti use?', '<p>The U.S. dollar. Many businesses also accept euros and yen and major credit cards, and several banks exchange currency.</p>'),
+                        qa('What are the power outlets like?', '<p>Outlets are 120 volts, the same as in the United States.</p>')]) +
+                    sec('Language, health, and safety', [
+                        qa('Will people speak English?', '<p>Many younger Tanitians speak fluent English. Very little English is spoken in rural areas, especially by older residents.</p>'),
+                        qa('What if I need medical care?', '<p>There is one hospital and several clinics. The hospital has many multilingual employees.</p>'),
+                        qa('Is Taniti safe?', '<p>Violent crime is very rare. As tourism grows, there are more reports of pickpocketing and other petty crime, so keep bags close in crowds.</p>')]) +
+                    sec('Food, drink, and lodging', [
+                        qa('What are the dining options?', '<p>Taniti has 10 restaurants: five serve mostly local fish and rice, three serve American-style meals, and two serve Pan-Asian cuisine.</p><p>For groceries there are two supermarkets, two smaller grocery stores, and one convenience store that is open 24 hours a day.</p>'),
+                        qa('Are there rules about alcohol?', '<p>Alcohol cannot be served or sold between midnight and 9 a.m. The drinking age is 18.</p>'),
+                        qa('What kinds of lodging are there?', '<p>From an inexpensive hostel to one large four-star resort, with many small family-owned hotels and a growing number of bed and breakfasts. All lodging is strictly regulated and regularly inspected by the government.</p>')]) +
+                    sec('Plan ahead', [
+                        qa('Are places closed on holidays?', '<p>Taniti has many national holidays, and many tourist attractions and restaurants are closed on those days. Plan your days around them.</p>'),
+                        qa('What else is there to do?', '<p>Besides beaches, the rainforest, and the volcano, there is a local history museum, chartered fishing tours, snorkeling, zip-lining, art galleries, pubs including a microbrewery, a dance club, a movie theater, helicopter rides, an arcade, and bowling. A nine-hole golf course should be operational by next year. Many of these are in Merriton Landing, on the north side of Yellow Leaf Bay.</p>')])
+            }
+        };
+        function render() {
+            var v = location.hash.slice(1); if (!V[v]) v = 'home';
+            var links = [['things', 'Things to Do'], ['getting', 'Getting Around'], ['stay', 'Where to Stay'], ['eat', 'Where to Eat'], ['plan', 'Plan My Trip' + (trip.length ? ' (' + trip.length + ')' : '')], ['faq', 'FAQ']];
+            document.getElementById('nav').innerHTML = links.map(function (l) { return '<a href="#' + l[0] + '"' + (l[0] === v ? ' aria-current="page"' : '') + '>' + l[1] + '</a>' }).join('');
+            document.getElementById('app').innerHTML = V[v](); document.title = 'Visit Taniti';
+        }
+        document.addEventListener('click', function (e) {
+            var t = e.target.closest('button'); if (!t) return;
+            if (t.dataset.add) { if (has(t.dataset.add)) trip = trip.filter(function (x) { return x.id !== t.dataset.add }); else trip.push({ id: t.dataset.add, day: 1 }); save(); render() }
+            else if (t.dataset.f) { f[t.dataset.f] = t.dataset.v; render() }
+            else if (t.dataset.rm) { trip = trip.filter(function (x) { return x.id !== t.dataset.rm }); save(); render() }
+        });
+        document.addEventListener('change', function (e) { var s = e.target; if (s.dataset && s.dataset.day) { trip.forEach(function (x) { if (x.id === s.dataset.day) x.day = +s.value }); save(); render() } });
+        window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0) });
+        render();
+    </script>
+</body>
+
+</html>
